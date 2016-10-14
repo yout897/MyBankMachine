@@ -6,6 +6,8 @@
 
 package mybankmachine;
 
+import java.text.DecimalFormat;
+
 /**
  *
  * @author aldic2547
@@ -13,18 +15,29 @@ package mybankmachine;
 public class ATM {
     
     String bankName;
+    double balance;
+    DecimalFormat df = new DecimalFormat("$####.00");
     
-    public ATM(String bnkName){
+    public ATM(String bnkName,double curBal){
         bankName = bnkName;
+        balance = curBal;
     }
-    public void withdrawal(){
-        
+    public void withdrawal(double amount){
+        balance -= amount;
+        System.out.println("You have withdrawaled " + df.format(amount) + " from your bank.\n");
     }
-    public void deposit(){
-        
+    public void deposit(double amount){
+        balance += amount;
+        System.out.println("You have deposited " + df.format(amount) + " to your bank.\n");
     }
-    public int interest(int balance,int anRate,int compPeriod){
-        int total = 0;
-        return total;
+    public void interest(double anRate,int compPeriod){
+        double total;
+        total = (balance*(1 + anRate));
+        total = Math.pow(total,compPeriod);
+        balance = total;
+    }
+    public double currentBalance(){
+        System.out.println("Your current balance is: " + df.format(balance));
+        return balance;
     }
 }
