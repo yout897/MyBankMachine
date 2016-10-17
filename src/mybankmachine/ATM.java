@@ -23,17 +23,22 @@ public class ATM {
         balance = curBal;
     }
     public void withdrawal(double amount){
-        balance -= amount;
-        System.out.println("You have withdrawaled " + df.format(amount) + " from your bank.\n");
+        if(amount <= balance){
+            balance -= amount;
+            System.out.println("You have withdrawaled " + df.format(amount) + " from your bank.");
+        }else{
+            System.out.println("You don't have enough money in your back to do that.");
+        }
     }
     public void deposit(double amount){
         balance += amount;
-        System.out.println("You have deposited " + df.format(amount) + " to your bank.\n");
+        System.out.println("You have deposited " + df.format(amount) + " to your bank.");
     }
     public void interest(double anRate,int compPeriod){
         double total;
-        total = (balance*(1 + anRate));
+        total = (1 + anRate);
         total = Math.pow(total,compPeriod);
+        total = balance*total;
         balance = total;
     }
     public double currentBalance(){
